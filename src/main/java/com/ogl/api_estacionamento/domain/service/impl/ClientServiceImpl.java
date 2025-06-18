@@ -1,6 +1,7 @@
 package com.ogl.api_estacionamento.domain.service.impl;
 
 import com.ogl.api_estacionamento.domain.controller.exception.ClientNotFoundException;
+import com.ogl.api_estacionamento.domain.controller.exception.CpfAlreadyUsedException;
 import com.ogl.api_estacionamento.domain.model.Client;
 import com.ogl.api_estacionamento.domain.repository.ClientRepository;
 import com.ogl.api_estacionamento.domain.service.ClientService;
@@ -24,7 +25,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client create(Client clientToCreate) {
         if (clientRepository.existsByCpf(clientToCreate.getCpf())) {
-            throw new IllegalArgumentException("CPF já cadastrado: " + clientToCreate.getCpf());
+            throw new CpfAlreadyUsedException(clientToCreate.getCpf());
         }
         return clientRepository.save(clientToCreate);
     }

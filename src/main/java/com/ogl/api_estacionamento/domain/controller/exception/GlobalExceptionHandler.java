@@ -19,6 +19,20 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleClientNotFoundException(ClientNotFoundException clientNotFoundException) {
         return new ResponseEntity<>(clientNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(CpfAlreadyUsedException.class)
+    public ResponseEntity<String> handleCpfAlreadyUsedException(CpfAlreadyUsedException cpfAlreadyUsedException) {
+        return new ResponseEntity<>(cpfAlreadyUsedException.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    // VEHICLE EXCEPTIONS
+    @ExceptionHandler(VehicleNotFoundException.class)
+    public ResponseEntity<String> handleVehicleNotFoundException(VehicleNotFoundException vehicleNotFoundException) {
+        return new ResponseEntity<>(vehicleNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(PlacaAlreadyUsedException.class)
+    public ResponseEntity<String> handlePlacaAlreadyUsedException(PlacaAlreadyUsedException placeAlreadyUsedException) {
+        return new ResponseEntity<>(placeAlreadyUsedException.getMessage(), HttpStatus.CONFLICT);
+    }
 
     // GENERAL EXCEPTIONS
     @ExceptionHandler(NoSuchElementException.class)
